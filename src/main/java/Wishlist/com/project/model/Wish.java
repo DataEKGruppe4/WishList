@@ -1,79 +1,77 @@
 package Wishlist.com.project.model;
 
 public class Wish {
-    private int id;
-    private String titel;
-    private double pris;
-    private String beskrivelse;
+    private int wishId;
+    private int wishlistId;
+    private String title;
+    private String description;
+    private double price;
     private String link;
+    private boolean isBought;
 
-
-    public Wish(int id, double pris, String titel, String beskrivelse, String link) {
-        this.id = id;
-        this.pris = pris;
-        this.titel = titel;
-        this.beskrivelse = beskrivelse;
+    public Wish(int wishId, int wishlistId, String title, String description, double price, String link, boolean isBought) {
+        this.wishId = wishId;
+        this.wishlistId = wishlistId;
+        this.title = title;
+        this.description = description;
+        this.price = price;
         this.link = link;
-
+        this.isBought = isBought;
     }
 
-    public double getPris() {
-        return pris;
+    public int getWishId() {
+        return wishId;
     }
 
-    public int getId() {
-        return id;
+    public void setWishId(int wishId) {
+        this.wishId = wishId;
     }
 
-    public String getBeskrivelse() {
-        return beskrivelse;
+    public int getWishlistId() {
+        return wishlistId;
+    }
+
+    public void setWishlistId(int wishlistId) {
+        this.wishlistId = wishlistId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public String getLink() {
         return link;
     }
 
-    public String getTitel() {
-        return titel;
-    }
-
-    public void setBeskrivelse(String beskrivelse) {
-        this.beskrivelse = beskrivelse;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setLink(String link) {
         this.link = link;
     }
 
-    public void setPris(double pris) {
-        this.pris = pris;
+    public boolean getIsBought() {
+        return isBought;
     }
 
-    public void setTitel(String titel) {
-        this.titel = titel;
+    public void setIsBought(boolean isBought) {
+        this.isBought = isBought;
     }
 }
-
-
-
-
-
-
-/* hvad skal indgå i wish
-
-- titel
-- pris
-- beskrivelse (størellse etc)
-- billede
-- link
-
-- måske et id ?
-
-
-
-
-*/
