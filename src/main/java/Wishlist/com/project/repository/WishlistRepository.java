@@ -1,6 +1,8 @@
 package Wishlist.com.project.repository;
 
+import Wishlist.com.project.model.User;
 import Wishlist.com.project.model.Wish;
+import Wishlist.com.project.model.WishList;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +17,9 @@ public class WishlistRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Wish> findAll() {
+
+    //så vi kan se alle wishes
+    public List<Wish> getAllWishes() {
         return jdbcTemplate.query(
                 "SELECT * FROM Wish",
                 (rs, rowNum) -> new Wish(
@@ -26,6 +30,29 @@ public class WishlistRepository {
                         rs.getDouble("price"),
                         rs.getString("link"),
                         rs.getBoolean("is_bought")
+                )
+        );
+    }
+
+    public List<User> getAllUsers() {
+        return jdbcTemplate.query(
+                "SELECT * FROM Users",
+                (rs, rowNum) -> new User(
+                        rs.getInt("user_id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("password")
+                )
+        );
+    }
+
+    public List<WishList> getAllWishLists() {
+        return jdbcTemplate.query(
+                "SELECT * FROM Wishlist",
+                (rs, rowNum) -> new WishList(
+                        rs.getInt("wishlist_id"),
+                        rs.getInt("user_id"),
+                        rs.getString("name")
                 )
         );
     }
