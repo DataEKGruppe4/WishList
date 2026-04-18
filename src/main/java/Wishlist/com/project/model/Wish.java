@@ -9,6 +9,9 @@ public class Wish {
     private String link;
     private boolean isBought;
 
+    public Wish() {
+    }
+
     public Wish(int wishId, int wishlistId, String title, String description, double price, String link, boolean isBought) {
         this.wishId = wishId;
         this.wishlistId = wishlistId;

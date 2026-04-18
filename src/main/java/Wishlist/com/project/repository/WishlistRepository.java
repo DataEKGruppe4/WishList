@@ -57,6 +57,15 @@ public class WishlistRepository {
         );
     }
 
+    public void signupUser(User user){
+        String sql = "INSERT INTO Users (name, email, password) VALUES (?,?,?)";
+
+        jdbcTemplate.update(sql,
+                user.getName(),
+                user.getEmail(),
+                user.getPassword());
+    }
+
     public void save(Wish wish) {
         jdbcTemplate.update(
                 "INSERT INTO Wish (wishlist_id, title, description, price, link, is_bought) VALUES (?, ?, ?, ?, ?, ?)",

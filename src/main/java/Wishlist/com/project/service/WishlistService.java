@@ -29,4 +29,8 @@ public class WishlistService {
         return wishlistRepository.getAllWishLists();
     }
 
+    public void signupUser(User user){
+        wishlistRepository.signupUser(user);
+    }
+
 }

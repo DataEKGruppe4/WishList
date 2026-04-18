@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Oprettelse</title>
+  <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<nav>
+      <strong>Ønskeliste</strong>
+      <ul>
+        <li><a th:href="@{/wish}">Hjem</a></li>
+        <li><a th:href="@{/wish/login}">Login</a></li>
+        <li><a th:href="@{/wish/opret}">Opret bruger</a></li>
+      </ul>
+</nav>
+
+<header>
+  <h1>Oprettelse</h1>
+  <p>Her kan du oprette din helt egen profil og få adgang til at lave og se dine ønskelister.</p>
+</header>
+
+<form th:action="@{/wish/signup}" method="post">
+  <div class="field">
+    <label class="label" for="name">Fulde navn</label>
+    <input class="input" type="text" id="name" name="name" placeholder="Indtast dit navn her" required>
+  </div>
+
+  <div class="field">
+    <label class="label" for="email">Email</label>
+    <input class="input" type="email" id="email" name="email" placeholder="Indtast din email her" required>
+  </div>
+
+  <div class="field">
+    <label class="label" for="password">Password</label>
+    <input class="input" type="password" id="password" name="password" placeholder="Indtast dit password her" required>
+  </div>
+
+  <div>
+    <input type="submit" value="Opret bruger">
+  </div>
+</form>
+
+</body>
+</html>

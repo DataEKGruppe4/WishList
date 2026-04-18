@@ -5,6 +5,9 @@ public class WishList {
     private int userId;
     private String name;
 
+    public WishList() {
+    }
+
     public WishList(int wishlistID, int userId, String name) {
         this.wishlistID = wishlistID;
         this.userId = userId;
