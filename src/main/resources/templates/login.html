@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<nav>
+  <strong>Ønskeliste</strong>
+  <ul>
+    <li><a th:href="index.html#Hjem" class="nav">Hjem</a></li>
+    <li><a th:href="login.html" class="nav">Login</a></li>
+    <li><a th:href="opret.html" class="nav">Opret bruger</a></li>
+  </ul>
+</nav>
+
+<header>
+  <h1>Login</h1>
+  <p>Her kan du logge ind på din helt egen profil.</p>
+</header>
+
+<form th:action="@{/wish/login}" method="post">
+  <div class="field">
+    <label class="label" for="email">Email</label>
+    <input class="input" type="email" id="email" name="email" placeholder="Indtast din email her" required>
+  </div>
+
+  <div class="field">
+    <label class="label" for="password">Password</label>
+    <input class="input" type="password" id="password" name="password" placeholder="Indtast dit password her" required>
+  </div>
+
+  <div>
+    <input type="submit" value="Login">
+  </div>
+</form>
+
+</body>
+</html>
