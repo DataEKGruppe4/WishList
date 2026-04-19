@@ -17,7 +17,7 @@ body {
 nav {
     background-color: #6c63ff;
     padding: 20px 40px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.10);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.10);
 }
 
 nav strong {
@@ -44,7 +44,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    background-color: rgba(255,255,255,0.20);
+    background-color: rgba(255, 255, 255, 0.20);
 }
 
 /* Header / hero */
@@ -79,7 +79,7 @@ section {
     margin: 30px 0;
     padding: 30px;
     border-radius: 18px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
 section h2 {
@@ -101,7 +101,7 @@ form {
     margin: 30px auto 60px;
     padding: 30px;
     border-radius: 18px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
 .field {
@@ -127,7 +127,7 @@ form {
 .input:focus {
     outline: none;
     border-color: #6c63ff;
-    box-shadow: 0 0 0 3px rgba(108,99,255,0.15);
+    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
 }
 
 /* Knapper */

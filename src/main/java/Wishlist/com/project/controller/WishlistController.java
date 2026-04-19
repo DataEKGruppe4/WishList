@@ -6,6 +6,7 @@ import Wishlist.com.project.model.WishList;
 import Wishlist.com.project.repository.WishlistRepository;
 import Wishlist.com.project.service.WishlistService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,12 +23,12 @@ public class WishlistController {
     }
 
     @GetMapping("")
-    public String showFrontPage(){
+    public String showFrontPage() {
         return "index";
     }
 
     @GetMapping("/opret")
-    public String showSignupPage(){
+    public String showSignupPage() {
         return "opret";
     }
 
@@ -35,10 +36,24 @@ public class WishlistController {
     public String showLoginPage() {
         return "login";
     }
+
     @PostMapping("/signup")
-    public String signupUser(@ModelAttribute User user){
+    public String signupUser(@ModelAttribute User user) {
         wishlistService.signupUser(user);
         return "redirect:/wish/login";
+    }
+
+    @PostMapping("/login")
+    public String findUserForLogin(@ModelAttribute User user, Model model) {
+
+        List<User> users = wishlistService.findUserForLogin(user.getEmail(), user.getPassword());
+
+        if (users.isEmpty()) {
+            model.addAttribute("error", "Forkert email eller password");
+            return "login";
+        }
+
+        return "redirect:/wish";
     }
 
 }

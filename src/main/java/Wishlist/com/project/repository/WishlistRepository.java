@@ -46,6 +46,19 @@ public class WishlistRepository {
         );
     }
 
+    public List<User> findUserForLogin(String email, String password) {
+        return jdbcTemplate.query(
+                "SELECT * FROM Users WHERE email = ? AND password = ?",
+                (rs, rowNum) -> new User(
+                        rs.getInt("user_id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("password")
+                ),
+                email, password
+        );
+    }
+
     public List<WishList> getAllWishLists() {
         return jdbcTemplate.query(
                 "SELECT * FROM Wishlist",
@@ -57,7 +70,7 @@ public class WishlistRepository {
         );
     }
 
-    public void signupUser(User user){
+    public void signupUser(User user) {
         String sql = "INSERT INTO Users (name, email, password) VALUES (?,?,?)";
 
         jdbcTemplate.update(sql,
@@ -65,6 +78,7 @@ public class WishlistRepository {
                 user.getEmail(),
                 user.getPassword());
     }
+
 
     public void save(Wish wish) {
         jdbcTemplate.update(
