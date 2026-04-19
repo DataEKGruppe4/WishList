@@ -37,4 +37,8 @@ public class WishlistService {
         return wishlistRepository.findUserForLogin(email, password);
     }
 
+    public User findUserById(int userId){
+        return wishlistRepository.findUserById(userId);
+    }
+
 }
