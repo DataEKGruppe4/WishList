@@ -5,6 +5,7 @@ import Wishlist.com.project.model.Wish;
 import Wishlist.com.project.model.WishList;
 import Wishlist.com.project.repository.WishlistRepository;
 import Wishlist.com.project.service.WishlistService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -44,16 +45,33 @@ public class WishlistController {
     }
 
     @PostMapping("/login")
-    public String findUserForLogin(@ModelAttribute User user, Model model) {
+    public String findUserForLogin(@ModelAttribute User user, HttpSession session, Model model) {
 
         List<User> users = wishlistService.findUserForLogin(user.getEmail(), user.getPassword());
 
-        if (users.isEmpty()) {
-            model.addAttribute("error", "Forkert email eller password");
-            return "login";
+        if (!users.isEmpty()) {
+            User loggedInUser = users.get(0);
+            session.setAttribute("userId", loggedInUser.getUserId());
+            return "redirect:/wish/dashboard";
         }
 
-        return "redirect:/wish";
+        model.addAttribute("error", "Forkert email eller password");
+        return "login";
+    }
+
+    @GetMapping("/dashboard")
+    public String showDashboard(HttpSession session ,Model model){
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        if (userId == null){
+            return "redirect:/login";
+        }
+
+        User user = wishlistService.findUserById(userId);
+
+        model.addAttribute("user", user);
+
+        return "dashboard";
     }
 
 }

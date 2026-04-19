@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<nav>
+    <strong>Ønskeliste</strong>
+    <ul>
+        <li><a th:href="@{/wish}">Hjem</a></li>
+        <li><a th:href="@{/logout}">Log ud</a></li>
+    </ul>
+</nav>
+
+<h1>Velkommen, <span th:text="${user.name}">Bruger</span></h1>
+
+<section>
+    <h2>Dine ønskelister</h2>
+
+    <ul>
+        <li th:each="wishlist : ${wishlists}">
+            <span th:text="${wishlist.name}">Wishlist navn</span>
+        </li>
+    </ul>
+</section>
+
+<section>
+    <h2>Opret en ny ønskeliste</h2>
+
+    <form action="/wishlist/create" method="post">
+        <input type="text" name="name" placeholder="Navn på ønskeliste" required>
+        <button type="submit">Opret</button>
+    </form>
+</section>
+
+</body>
+</html>
