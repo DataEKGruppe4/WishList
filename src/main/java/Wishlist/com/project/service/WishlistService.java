@@ -33,4 +33,8 @@ public class WishlistService {
         wishlistRepository.signupUser(user);
     }
 
+    public List<User> findUserForLogin(String email, String password){
+        return wishlistRepository.findUserForLogin(email, password);
+    }
+
 }

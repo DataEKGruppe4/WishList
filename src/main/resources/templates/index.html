@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html lang="da" xmlns="http://www.w3.org/1999/html">
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Forside</title>
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
 <nav>
     <strong>Ønskeliste</strong>
     <br>
     <ul>
-        <li><a href="#Hjem" class="nav">Hjem</a></li>
+        <li><a th:href="@{/wish}" class="nav">Hjem</a></li>
         <li><a href="#Om" class="nav">Om</a></li>
-        <li><a href="login.html" class="nav">Login</a></li>
-        <li><a href="opret.html" class="nav">Opret bruger</a></li>
+        <li><a th:href="@{/wish/login}" class="nav">Login</a></li>
+        <li><a th:href="@{/wish/opret}" class="nav">Opret bruger</a></li>
         <li><a href="#Kontakt" class="nav">Kontakt os</a></li>
     </ul>
 </nav>
