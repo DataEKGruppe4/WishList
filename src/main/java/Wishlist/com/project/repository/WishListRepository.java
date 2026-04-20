@@ -6,6 +6,7 @@ import Wishlist.com.project.model.WishList;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+
 import java.util.List;
 
 
@@ -54,6 +55,24 @@ public class WishListRepository {
         );
     }
 
+    public void updateWish(Wish wish){
+        String sql = "UPDATE Wish SET title = ?, description = ?, price = ?, link = ?, is_bought = ? WHERE wish_id = ?";
+        jdbcTemplate.update(sql,
+                wish.getTitle(),
+                wish.getDescription(),
+                wish.getPrice(),
+                wish.getLink(),
+                wish.getIsBought(),
+                wish.getWishId());
+    }
+
+    public void updateWishList(WishList wishList){
+        String sql = "UPDATE Wishlist SET name = ? WHERE wishlist_id = ?";
+        jdbcTemplate.update(sql,
+                wishList.getName(),
+                wishList.getWishListId());
+    }
+
     public void createWishList(WishList wishList, int userId) {
         String sql = "INSERT INTO Wishlist (user_id, name) VALUES (?,?)";
 
@@ -80,6 +99,10 @@ public class WishListRepository {
         jdbcTemplate.update(sql, wishListId);
     }
 
+    public void markWishAsBought(int wishId, boolean bought) {
+        String sql = "UPDATE Wish SET is_bought = ? WHERE wish_id = ?";
+        jdbcTemplate.update(sql, bought, wishId);
+    }
 
     public User findUserById(int userId) {
         return jdbcTemplate.queryForObject(
@@ -119,6 +142,23 @@ public class WishListRepository {
         );
     }
 
+    public Wish findWishById(int wishId){
+        return jdbcTemplate.queryForObject(
+                "SELECT * FROM Wish WHERE wish_id = ?",
+                (rs, rowNum) -> new Wish(
+                        rs.getInt("wish_id"),
+                        rs.getInt("wishlist_id"),
+                        rs.getString("title"),
+                        rs.getString("description"),
+                        rs.getDouble("price"),
+                        rs.getString("link"),
+                        rs.getBoolean("is_bought")
+                ),
+                wishId
+        );
+    }
+
+
     public List<Wish> findWishesByWishListId(int wishListId) {
         return jdbcTemplate.query(
                 "SELECT * FROM Wish WHERE wishlist_id = ?",
@@ -135,9 +175,5 @@ public class WishListRepository {
         );
     }
 
-    public void markWishAsBought(int wishId, boolean bought) {
-        String sql = "UPDATE Wish SET is_bought = ? WHERE wish_id = ?";
-        jdbcTemplate.update(sql, bought, wishId);
-    }
 
 }

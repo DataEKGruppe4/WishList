@@ -3,8 +3,6 @@ package Wishlist.com.project.controller;
 import Wishlist.com.project.model.User;
 import Wishlist.com.project.model.Wish;
 import Wishlist.com.project.model.WishList;
-import Wishlist.com.project.repository.WishListRepository;
-import Wishlist.com.project.service.WishListService;
 import Wishlist.com.project.service.WishListService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
@@ -51,7 +49,7 @@ public class WishListController {
         List<User> users = wishListService.findUserForLogin(user.getEmail(), user.getPassword());
 
         if (!users.isEmpty()) {
-            User loggedInUser = users.get(0);
+            User loggedInUser = users.getFirst();
             session.setAttribute("userId", loggedInUser.getUserId());
             return "redirect:/wish/dashboard";
         }
@@ -225,6 +223,105 @@ public class WishListController {
         }
 
         wishListService.deleteWishList(wishListId);
+
+        return "redirect:/wish/dashboard";
+    }
+
+    @GetMapping("/wishlist/{wishlistId}/wish/{wishId}/edit")
+    public String showEditWishForm(@PathVariable int wishlistId,
+                                   @PathVariable int wishId,
+                                   HttpSession session,
+                                   Model model) {
+
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        if (userId == null) {
+            return "redirect:/wish/login";
+        }
+
+        WishList wishList = wishListService.findWishListById(wishlistId);
+
+        if (wishList.getUserId() != userId) {
+            return "redirect:/wish/dashboard";
+        }
+
+        Wish wish = wishListService.findWishById(wishId);
+
+        model.addAttribute("wish", wish);
+        model.addAttribute("wishList", wishList);
+
+        return "editWish";
+    }
+
+    @PostMapping("/wishlist/{wishlistId}/wish/{wishId}/edit")
+    public String updateWish(@PathVariable int wishlistId,
+                             @PathVariable int wishId,
+                             @ModelAttribute Wish wish,
+                             HttpSession session) {
+
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        if (userId == null) {
+            return "redirect:/wish/login";
+        }
+
+        WishList wishList = wishListService.findWishListById(wishlistId);
+
+        if (wishList.getUserId() != userId) {
+            return "redirect:/wish/dashboard";
+        }
+
+        wish.setWishId(wishId);
+        wish.setWishListId(wishlistId);
+
+        wishListService.updateWish(wish);
+
+        return "redirect:/wish/wishlist/" + wishlistId;
+    }
+
+    @GetMapping("/wishlist/{wishlistId}/edit")
+    public String showEditWishListForm(@PathVariable int wishlistId,
+                                       HttpSession session,
+                                       Model model) {
+
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        if (userId == null) {
+            return "redirect:/wish/login";
+        }
+
+        WishList wishList = wishListService.findWishListById(wishlistId);
+
+        if (wishList.getUserId() != userId) {
+            return "redirect:/wish/dashboard";
+        }
+
+        model.addAttribute("wishlist", wishList);
+
+        return "editWishList";
+    }
+
+    @PostMapping("/wishlist/{wishlistId}/edit")
+    public String updateWishList(@PathVariable int wishlistId,
+                                 @ModelAttribute WishList wishList,
+                                 HttpSession session) {
+
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        if (userId == null) {
+            return "redirect:/wish/login";
+        }
+
+        WishList existingWishList = wishListService.findWishListById(wishlistId);
+
+        if (existingWishList.getUserId() != userId) {
+            return "redirect:/wish/dashboard";
+        }
+
+        wishList.setWishListId(wishlistId);
+        wishList.setUserId(userId);
+
+        wishListService.updateWishList(wishList);
 
         return "redirect:/wish/dashboard";
     }

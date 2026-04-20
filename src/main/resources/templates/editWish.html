@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Rediger ønske</title>
+  <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<nav>
+  <strong>Ønskeliste</strong>
+  <ul>
+    <li><a th:href="@{/wish/dashboard}">Dashboard</a></li>
+    <li><a th:href="@{/wish/wishlist/{id}(id=${wishList.wishListId})}">Tilbage</a></li>
+    <li><a th:href="@{/wish/logout}">Log ud</a></li>
+  </ul>
+</nav>
+
+<div class="page-intro auth-intro">
+  <p class="intro-badge">Rediger ønske</p>
+  <h1>Opdater dit ønske</h1>
+  <p>Her kan du ændre titel, beskrivelse, pris og link på dit ønske.</p>
+</div>
+
+<form class="page-form"
+      th:action="@{/wish/wishlist/{wishlistId}/wish/{wishId}/edit(wishlistId=${wishList.wishListId}, wishId=${wish.wishId})}"
+      th:object="${wish}"
+      method="post">
+
+  <div class="field">
+    <label class="label" for="title">Titel</label>
+    <input class="input" type="text" id="title" th:field="*{title}" placeholder="Indtast titel" required>
+  </div>
+
+  <div class="field">
+    <label class="label" for="description">Beskrivelse</label>
+    <input class="input" type="text" id="description" th:field="*{description}" placeholder="Indtast beskrivelse">
+  </div>
+
+  <div class="field">
+    <label class="label" for="price">Pris</label>
+    <input class="input" type="number" step="0.01" id="price" th:field="*{price}" placeholder="Indtast pris" required>
+  </div>
+
+  <div class="field">
+    <label class="label" for="link">Link</label>
+    <input class="input" type="text" id="link" th:field="*{link}" placeholder="Indtast link">
+  </div>
+
+  <input type="submit" value="Gem ændringer">
+</form>
+
+</body>
+</html>

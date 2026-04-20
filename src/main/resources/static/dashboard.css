@@ -114,9 +114,6 @@
     font-weight: 600;
     margin-left: 6px;
     display: inline-block;
-}
-
-.user-name {
     transition: 0.2s ease;
 }
 
@@ -124,7 +121,7 @@
     transform: translateY(-1px);
 }
 
-.open-btn,
+.edit-btn,
 .delete-btn {
     height: 42px;
     padding: 0 16px;
@@ -140,13 +137,15 @@
     transition: 0.2s ease;
 }
 
-.open-btn {
-    background: #5b4bff;
-    color: white;
+.edit-btn {
+    background: #f5f3ff;
+    color: #5b4bff;
+    border: 1px solid #ddd8ff;
 }
 
-.open-btn:hover {
-    background: #4737e6;
+.edit-btn:hover {
+    background: #ede9ff;
+    color: #4737e6;
 }
 
 .delete-btn {

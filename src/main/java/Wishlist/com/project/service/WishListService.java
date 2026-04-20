@@ -62,6 +62,18 @@ public class WishListService {
         return wishListRepository.findWishListById(wishList);
     }
 
+    public void updateWishList(WishList wishList){
+        wishListRepository.updateWishList(wishList);
+    }
+
+    public Wish findWishById (int wish){
+        return wishListRepository.findWishById(wish);
+    }
+
+    public void updateWish(Wish wish){
+        wishListRepository.updateWish(wish);
+    }
+
     public List<Wish> findWishesByWishListId(int wishId) {
         return wishListRepository.findWishesByWishListId(wishId);
     }

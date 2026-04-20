@@ -38,6 +38,12 @@
 
                 <div class="dashboard-card-actions">
 
+                    <a class="edit-btn"
+                       th:href="@{/wish/wishlist/{id}/edit(id=${wishlist.wishListId})}"
+                       onclick="event.stopPropagation();">
+                        Rediger
+                    </a>
+
                     <form th:action="@{/wish/dashboard/wishlist/{id}/delete(id=${wishlist.wishListId})}"
                           method="post"
                           onclick="event.stopPropagation();">
