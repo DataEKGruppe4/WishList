@@ -25,6 +25,10 @@ public class WishListService {
         wishListRepository.createWish(wish, wishListId);
     }
 
+    public void createWishList(WishList wishList, int userId){
+        wishListRepository.createWishList(wishList, userId);
+    }
+
     public void markWishAsBought(int wishId, boolean bought) {
         wishListRepository.markWishAsBought(wishId, bought);
     }

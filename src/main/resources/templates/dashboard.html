@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" th:href="@{/dashboard.css}">
 </head>
 <body>
 
@@ -14,30 +15,38 @@
         <li><a th:href="@{/wish/logout}">Log ud</a></li>
     </ul>
 </nav>
+<div class="dashboard-page">
 
-<h1>Velkommen, <span th:text="${user.name}">Bruger</span></h1>
+    <div class="dashboard-header">
+        <h1>Velkommen, <span th:text="${user.name}">Bruger</span></h1>
+        <p>Her kan du se og oprette dine ønskelister</p>
+    </div>
 
-<section>
-    <h2>Dine ønskelister</h2>
+    <section class="dashboard-section">
+        <h2>Dine ønskelister</h2>
 
-    <ul>
-        <li th:each="wishlist : ${wishLists}">
-            <a th:href="@{/wish/wishlist/{id}(id=${wishlist.wishListId})}"
-               th:text="${wishlist.name}">
-                WishList navn
+        <div class="dashboard-wishlist-container">
+            <a class="dashboard-wishlist-card"
+               th:each="wishlist : ${wishLists}"
+               th:href="@{/wish/wishlist/{id}(id=${wishlist.wishListId})}">
+                <h3 th:text="${wishlist.name}">Wishlist navn</h3>
+                <p>Klik for at åbne ønskelisten</p>
             </a>
-        </li>
-    </ul>
-</section>
+        </div>
+    </section>
 
-<section>
-    <h2>Opret en ny ønskeliste</h2>
+    <section class="dashboard-section">
+        <h2>Opret en ny ønskeliste</h2>
 
-    <form action="/wishlist/create" method="post">
-        <input type="text" name="name" placeholder="Navn på ønskeliste" required>
-        <button type="submit">Opret</button>
-    </form>
-</section>
+        <form class="dashboard-form"
+              th:action="@{/wish/dashboard/create-wishlist}"
+              method="post">
+            <input type="text" name="name" placeholder="Navn på ønskeliste" required>
+            <button type="submit">Opret</button>
+        </form>
+    </section>
+
+</div>
 
 </body>
 </html>
