@@ -54,6 +54,15 @@ public class WishListRepository {
         );
     }
 
+    public void createWishList(WishList wishList, int userId){
+        String sql = "INSERT INTO Wishlist (user_id, name) VALUES (?,?)";
+
+        jdbcTemplate.update(sql,
+                userId,
+                wishList.getName()
+        );
+    }
+
 
     public User findUserById(int userId) {
         return jdbcTemplate.queryForObject(

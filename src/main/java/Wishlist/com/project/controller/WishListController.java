@@ -80,6 +80,20 @@ public class WishListController {
         return "redirect:/wish/wishlist/" + id;
     }
 
+    @PostMapping("/dashboard/create-wishlist")
+    public String createWishList(@ModelAttribute WishList wishList, HttpSession session) {
+
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        if (userId == null) {
+            return "redirect:/wish/login";
+        }
+
+        wishListService.createWishList(wishList, userId);
+
+        return "redirect:/wish/dashboard";
+    }
+
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate();
