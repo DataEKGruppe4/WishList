@@ -22,7 +22,10 @@
 
     <ul>
         <li th:each="wishlist : ${wishLists}">
-            <span th:text="${wishlist.name}">Wishlist navn</span>
+            <a th:href="@{/wish/wishlist/{id}(id=${wishlist.wishListId})}"
+               th:text="${wishlist.name}">
+                WishList navn
+            </a>
         </li>
     </ul>
 </section>
