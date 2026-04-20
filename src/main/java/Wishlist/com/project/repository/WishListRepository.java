@@ -9,11 +9,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class WishlistRepository {
+public class WishListRepository {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public WishlistRepository(JdbcTemplate jdbcTemplate) {
+    public WishListRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -51,6 +51,32 @@ public class WishlistRepository {
                 userId
         );
     }
+
+    public List<WishList> findWishListsByUserId(int userId){
+        return jdbcTemplate.query(
+                "SELECT * FROM Wishlist WHERE user_id = ?",
+                (rs, rowNum) -> new WishList(
+                        rs.getInt("wishlist_id"),
+                        rs.getInt("user_id"),
+                        rs.getString("name")
+                ),
+                userId
+        );
+    }
+
+    public WishList findWishListById(int wishListId){
+        return jdbcTemplate.queryForObject(
+                "SELECT * FROM Wishlist WHERE wishlist_id = ?",
+                 (rs, rowNum) -> new WishList(
+                         rs.getInt("wishlist_id"),
+                         rs.getInt("user_id"),
+                         rs.getString("name")
+                 ),
+                wishListId
+        );
+    }
+
+
 
 
 
@@ -103,7 +129,7 @@ public class WishlistRepository {
     public void save(Wish wish) {
         jdbcTemplate.update(
                 "INSERT INTO Wish (wishlist_id, title, description, price, link, is_bought) VALUES (?, ?, ?, ?, ?, ?)",
-                wish.getWishlistId(),
+                wish.getWishListId(),
                 wish.getTitle(),
                 wish.getDescription(),
                 wish.getPrice(),
