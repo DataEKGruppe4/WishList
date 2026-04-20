@@ -68,6 +68,11 @@
                             <button type="submit" class="undo-btn">Fortryd</button>
                         </form>
 
+                        <a class="wish-btn secondary-edit-btn"
+                           th:href="@{/wish/wishlist/{wishlistId}/wish/{wishId}/edit(wishlistId=${wishList.wishListId}, wishId=${wish.wishId})}">
+                            Rediger
+                        </a>
+
                         <form th:action="@{/wish/wishlist/{wishlistId}/wish/{wishId}/delete(wishlistId=${wishList.wishListId}, wishId=${wish.wishId})}"
                               method="post">
                             <button type="submit" class="delete-btn">Slet</button>

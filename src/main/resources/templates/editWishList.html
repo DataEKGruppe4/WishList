@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Rediger ønskeliste</title>
+  <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<nav>
+  <strong>Ønskeliste</strong>
+  <ul>
+    <li><a th:href="@{/wish/dashboard}">Dashboard</a></li>
+    <li><a th:href="@{/wish/wishlist/{id}(id=${wishlist.wishListId})}">Tilbage</a></li>
+    <li><a th:href="@{/wish/logout}">Log ud</a></li>
+  </ul>
+</nav>
+
+<div class="page-intro auth-intro">
+  <p class="intro-badge">Rediger ønskeliste</p>
+  <h1>Opdater din ønskeliste</h1>
+  <p>Her kan du ændre navnet på din ønskeliste.</p>
+</div>
+
+<form class="page-form"
+      th:action="@{/wish/wishlist/{wishlistId}/edit(wishlistId=${wishlist.wishListId})}"
+      th:object="${wishlist}"
+      method="post">
+
+  <div class="field">
+    <label class="label" for="name">Navn på ønskeliste</label>
+    <input class="input" type="text" id="name" th:field="*{name}" placeholder="Indtast nyt navn" required>
+  </div>
+
+  <input type="submit" value="Gem ændringer">
+</form>
+
+</body>
+</html>

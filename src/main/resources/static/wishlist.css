@@ -10,6 +10,21 @@
     margin-bottom: 34px;
 }
 
+.wishlist-header-actions {
+    margin-top: 18px;
+}
+
+.secondary-edit-btn {
+    background: #f5f3ff;
+    color: #5b4bff;
+    border: 1px solid #ddd8ff;
+}
+
+.secondary-edit-btn:hover {
+    background: #ede9ff;
+    color: #4737e6;
+}
+
 .wishlist-title {
     font-size: 52px;
     line-height: 1.08;
