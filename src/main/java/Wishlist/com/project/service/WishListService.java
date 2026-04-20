@@ -17,32 +17,35 @@ public class WishListService {
         this.wishListRepository = wishListRepository;
     }
 
-
-    public void signupUser(User user){
+    public void signupUser(User user) {
         wishListRepository.signupUser(user);
     }
 
-    public void createWish(Wish wish, int wishListId){
-        wishListRepository.createWish(wish,wishListId);
+    public void createWish(Wish wish, int wishListId) {
+        wishListRepository.createWish(wish, wishListId);
     }
 
-    public List<User> findUserForLogin(String email, String password){
+    public void markWishAsBought(int wishId, boolean bought) {
+        wishListRepository.markWishAsBought(wishId, bought);
+    }
+
+    public List<User> findUserForLogin(String email, String password) {
         return wishListRepository.findUserForLogin(email, password);
     }
 
-    public User findUserById(int userId){
+    public User findUserById(int userId) {
         return wishListRepository.findUserById(userId);
     }
 
-    public List<WishList> findWishListsByUserId(int userId){
+    public List<WishList> findWishListsByUserId(int userId) {
         return wishListRepository.findWishListsByUserId(userId);
     }
 
-    public WishList findWishListById(int wishList){
+    public WishList findWishListById(int wishList) {
         return wishListRepository.findWishListById(wishList);
     }
 
-    public List<Wish> findWishesByWishListId(int wishId){
+    public List<Wish> findWishesByWishListId(int wishId) {
         return wishListRepository.findWishesByWishListId(wishId);
     }
 

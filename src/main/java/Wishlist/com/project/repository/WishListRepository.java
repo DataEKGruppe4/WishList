@@ -109,6 +109,11 @@ public class WishListRepository {
         );
     }
 
+    public void markWishAsBought(int wishId, boolean bought) {
+        String sql = "UPDATE Wish SET is_bought = ? WHERE wish_id = ?";
+        jdbcTemplate.update(sql, bought, wishId);
+    }
+
 
 
     public void save(Wish wish) {

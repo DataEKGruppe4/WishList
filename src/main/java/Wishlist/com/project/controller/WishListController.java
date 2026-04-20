@@ -61,11 +61,11 @@ public class WishListController {
     }
 
     @PostMapping("/wishlist/{id}/create-wish")
-    public String createWish(@PathVariable int id, @ModelAttribute Wish wish, HttpSession session){
+    public String createWish(@PathVariable int id, @ModelAttribute Wish wish, HttpSession session) {
 
         Integer userId = (Integer) session.getAttribute("userId");
 
-        if (userId == null){
+        if (userId == null) {
             return "redirect:/wish/login";
         }
 
@@ -81,17 +81,17 @@ public class WishListController {
     }
 
     @GetMapping("/logout")
-    public String logout(HttpSession session){
+    public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/wish/login?logout";
 
     }
 
     @GetMapping("/dashboard")
-    public String showDashboard(HttpSession session ,Model model){
+    public String showDashboard(HttpSession session, Model model) {
         Integer userId = (Integer) session.getAttribute("userId");
 
-        if (userId == null){
+        if (userId == null) {
             return "redirect:/wish/login";
         }
 
@@ -106,11 +106,11 @@ public class WishListController {
     }
 
     @GetMapping("/wishlist/{id}")
-    public String showWishList (@PathVariable int id, HttpSession session, Model model){
+    public String showWishList(@PathVariable int id, HttpSession session, Model model) {
 
         Integer userId = (Integer) session.getAttribute("userId");
 
-        if (userId == null){
+        if (userId == null) {
             return "redirect:/wish/login";
         }
 
@@ -129,8 +129,49 @@ public class WishListController {
         return "wishList";
     }
 
+    @PostMapping("/wishlist/{wishlistId}/wish/{wishId}/bought")
+    public String markWishAsBought(@PathVariable int wishlistId,
+                                   @PathVariable int wishId,
+                                   HttpSession session) {
 
+        Integer userId = (Integer) session.getAttribute("userId");
 
+        if (userId == null) {
+            return "redirect:/wish/login";
+        }
+
+        WishList wishList = wishListService.findWishListById(wishlistId);
+
+        if (wishList.getUserId() != userId) {
+            return "redirect:/wish/dashboard";
+        }
+
+        wishListService.markWishAsBought(wishId, true);
+
+        return "redirect:/wish/wishlist/" + wishlistId;
+    }
+
+    @PostMapping("/wishlist/{wishlistId}/wish/{wishId}/unbought")
+    public String markWishAsUnbought(@PathVariable("wishlistId") int wishListId,
+                                     @PathVariable("wishId") int wishId,
+                                     HttpSession session) {
+
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        if (userId == null) {
+            return "redirect:/wish/login";
+        }
+
+        WishList wishList = wishListService.findWishListById(wishListId);
+
+        if (wishList.getUserId() != userId) {
+            return "redirect:/wish/dashboard";
+        }
+
+        wishListService.markWishAsBought(wishId, false);
+
+        return "redirect:/wish/wishlist/" + wishListId;
+    }
 
 
 }
