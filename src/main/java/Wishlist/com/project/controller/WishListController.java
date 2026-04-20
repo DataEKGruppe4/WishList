@@ -37,7 +37,7 @@ public class WishListController {
         return "login";
     }
 
-    @PostMapping("/signup")
+    @PostMapping("/opret")
     public String signupUser(@ModelAttribute User user) {
         wishListService.signupUser(user);
         return "redirect:/wish/login";
