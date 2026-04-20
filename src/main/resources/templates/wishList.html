@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Wishlist</title>
   <link rel="stylesheet" th:href="@{/style.css}">
+  <link rel="stylesheet" th:href="@{/wishlist.css}">
 </head>
 <body>
 
@@ -15,17 +16,50 @@
   </ul>
 </nav>
 
-<h1 th:text="${wishList.name}">Wishlist navn</h1>
-<p>Ejer: <span th:text="${user.name}">Bruger</span></p>
+<div class="wishlist-page">
 
-<ul>
-  <li th:each="wish : ${wishes}">
-    <h3 th:text="${wish.title}">Titel</h3>
-    <p th:text="${wish.description}">Beskrivelse</p>
-    <p>Pris: <span th:text="${wish.price}">0</span> kr.</p>
-    <a th:href="${wish.link}" target="_blank">Se produkt</a>
-  </li>
-</ul>
+  <div class="wishlist-header">
+    <h1 th:text="${wishList.name}">Wishlist navn</h1>
+    <p class="wishlist-owner">Ejer: <span th:text="${user.name}">Bruger</span></p>
+  </div>
+
+  <section class="wish-section">
+    <div class="wish-container">
+
+      <div class="wish-card" th:each="wish : ${wishes}">
+        <h3 th:text="${wish.title}">Titel</h3>
+
+        <p class="wish-description" th:text="${wish.description}">Beskrivelse</p>
+
+        <p class="price">
+          <span th:text="${wish.price}">0</span> kr.
+        </p>
+
+        <a class="wish-btn"
+           th:href="${wish.link}"
+           target="_blank">
+          Se produkt
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="create-wish-section">
+    <h2>Opret nyt ønske</h2>
+
+    <form class="create-wish-form"
+          th:action="@{/wish/wishlist/{id}/create-wish(id=${wishList.wishListId})}"
+          method="post">
+      <input type="text" name="title" placeholder="Titel" required>
+      <input type="text" name="description" placeholder="Beskrivelse" required>
+      <input type="number" step="0.01" name="price" placeholder="Pris" required>
+      <input type="text" name="link" placeholder="Link">
+      <button type="submit">Opret ønske</button>
+    </form>
+  </section>
+
+</div>
 
 </body>
 </html>

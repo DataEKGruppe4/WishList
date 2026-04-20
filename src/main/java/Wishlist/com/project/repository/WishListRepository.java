@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+
 @Repository
 public class WishListRepository {
 
@@ -39,7 +40,22 @@ public class WishListRepository {
                 user.getPassword());
     }
 
-    public User findUserById(int userId){
+
+    public void createWish(Wish wish, int wishListId) {
+        String sql = "INSERT INTO Wish (wishlist_id, title, description, price, link, is_bought) VALUES (?,?,?,?,?,?)";
+
+        jdbcTemplate.update(sql,
+                wishListId,
+                wish.getTitle(),
+                wish.getDescription(),
+                wish.getPrice(),
+                wish.getLink(),
+                false
+        );
+    }
+
+
+    public User findUserById(int userId) {
         return jdbcTemplate.queryForObject(
                 "SELECT * FROM Users WHERE user_id = ?",
                 (rs, rowNum) -> new User(
@@ -52,7 +68,8 @@ public class WishListRepository {
         );
     }
 
-    public List<WishList> findWishListsByUserId(int userId){
+
+    public List<WishList> findWishListsByUserId(int userId) {
         return jdbcTemplate.query(
                 "SELECT * FROM Wishlist WHERE user_id = ?",
                 (rs, rowNum) -> new WishList(
@@ -64,19 +81,19 @@ public class WishListRepository {
         );
     }
 
-    public WishList findWishListById(int wishListId){
+    public WishList findWishListById(int wishListId) {
         return jdbcTemplate.queryForObject(
                 "SELECT * FROM Wishlist WHERE wishlist_id = ?",
-                 (rs, rowNum) -> new WishList(
-                         rs.getInt("wishlist_id"),
-                         rs.getInt("user_id"),
-                         rs.getString("name")
-                 ),
+                (rs, rowNum) -> new WishList(
+                        rs.getInt("wishlist_id"),
+                        rs.getInt("user_id"),
+                        rs.getString("name")
+                ),
                 wishListId
         );
     }
 
-    public List<Wish> findWishesByWishListId(int wishListId){
+    public List<Wish> findWishesByWishListId(int wishListId) {
         return jdbcTemplate.query(
                 "SELECT * FROM Wish WHERE wishlist_id = ?",
                 (rs, rowNum) -> new Wish(
@@ -93,54 +110,6 @@ public class WishListRepository {
     }
 
 
-
-
-
-
-
-
-    //så vi kan se alle wishes
-    public List<Wish> getAllWishes() {
-        return jdbcTemplate.query(
-                "SELECT * FROM Wish",
-                (rs, rowNum) -> new Wish(
-                        rs.getInt("wish_id"),
-                        rs.getInt("wishlist_id"),
-                        rs.getString("title"),
-                        rs.getString("description"),
-                        rs.getDouble("price"),
-                        rs.getString("link"),
-                        rs.getBoolean("is_bought")
-                )
-        );
-    }
-
-    public List<User> getAllUsers() {
-        return jdbcTemplate.query(
-                "SELECT * FROM Users",
-                (rs, rowNum) -> new User(
-                        rs.getInt("user_id"),
-                        rs.getString("name"),
-                        rs.getString("email"),
-                        rs.getString("password")
-                )
-        );
-    }
-
-
-
-
-
-    public List<WishList> getAllWishLists() {
-        return jdbcTemplate.query(
-                "SELECT * FROM Wishlist",
-                (rs, rowNum) -> new WishList(
-                        rs.getInt("wishlist_id"),
-                        rs.getInt("user_id"),
-                        rs.getString("name")
-                )
-        );
-    }
 
     public void save(Wish wish) {
         jdbcTemplate.update(
