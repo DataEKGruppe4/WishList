@@ -1,25 +1,25 @@
 package Wishlist.com.project.model;
 
 public class WishList {
-    private int wishlistID;
+    private int wishListId;
     private int userId;
     private String name;
 
     public WishList() {
     }
 
-    public WishList(int wishlistID, int userId, String name) {
-        this.wishlistID = wishlistID;
+    public WishList(int wishListId, int userId, String name) {
+        this.wishListId = wishListId;
         this.userId = userId;
         this.name = name;
     }
 
-    public int getWishlistID() {
-        return wishlistID;
+    public int getWishListId() {
+        return wishListId;
     }
 
-    public void setWishlistID(int wishlistID) {
-        this.wishlistID = wishlistID;
+    public void setWishListId(int wishListId) {
+        this.wishListId = wishListId;
     }
 
     public int getUserId() {

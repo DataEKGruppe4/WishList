@@ -2,7 +2,7 @@ package Wishlist.com.project.model;
 
 public class Wish {
     private int wishId;
-    private int wishlistId;
+    private int wishListId;
     private String title;
     private String description;
     private double price;
@@ -12,9 +12,9 @@ public class Wish {
     public Wish() {
     }
 
-    public Wish(int wishId, int wishlistId, String title, String description, double price, String link, boolean isBought) {
+    public Wish(int wishId, int wishListId, String title, String description, double price, String link, boolean isBought) {
         this.wishId = wishId;
-        this.wishlistId = wishlistId;
+        this.wishListId = wishListId;
         this.title = title;
         this.description = description;
         this.price = price;
@@ -30,12 +30,12 @@ public class Wish {
         this.wishId = wishId;
     }
 
-    public int getWishlistId() {
-        return wishlistId;
+    public int getWishListId() {
+        return wishListId;
     }
 
-    public void setWishlistId(int wishlistId) {
-        this.wishlistId = wishlistId;
+    public void setWishListId(int wishListId) {
+        this.wishListId = wishListId;
     }
 
     public String getTitle() {

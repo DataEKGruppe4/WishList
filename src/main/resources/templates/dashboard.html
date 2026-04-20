@@ -11,7 +11,7 @@
     <strong>Ønskeliste</strong>
     <ul>
         <li><a th:href="@{/wish}">Hjem</a></li>
-        <li><a th:href="@{/logout}">Log ud</a></li>
+        <li><a th:href="@{/wish/logout}">Log ud</a></li>
     </ul>
 </nav>
 
@@ -21,7 +21,7 @@
     <h2>Dine ønskelister</h2>
 
     <ul>
-        <li th:each="wishlist : ${wishlists}">
+        <li th:each="wishlist : ${wishLists}">
             <span th:text="${wishlist.name}">Wishlist navn</span>
         </li>
     </ul>
