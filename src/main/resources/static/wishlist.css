@@ -1,0 +1,136 @@
+/* Wishlist page only */
+
+.wishlist-page {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+}
+
+.wishlist-header {
+    margin-bottom: 20px;
+}
+
+.wishlist-header h1 {
+    font-size: 42px;
+    color: #2f2f2f;
+    margin-bottom: 6px;
+}
+
+.wishlist-owner {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+/* Overskriver den generelle section fra style.css på denne side */
+.wish-section {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.wish-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+}
+
+.wish-card {
+    background: white;
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.10);
+    border: 1px solid #ececff;
+    min-height: 230px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.wish-card h3 {
+    margin: 0 0 12px 0;
+    font-size: 28px;
+    color: #2f2f2f;
+}
+
+.wish-description {
+    color: #666;
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #5b4bff;
+    margin-bottom: 16px;
+}
+
+.wish-btn {
+    display: inline-block;
+    align-self: flex-start;
+    background: #5b4bff;
+    color: white;
+    text-decoration: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.wish-btn:hover {
+    background: #4737e6;
+}
+
+.create-wish-section {
+    margin-top: 50px;
+}
+
+.create-wish-section h2 {
+    font-size: 34px;
+    color: #2f2f2f;
+    margin-bottom: 20px;
+}
+
+/* Gør formen på wishlist-siden pænere uden at ødelægge andre forms */
+.create-wish-form {
+    background: white;
+    max-width: 900px;
+    margin: 0;
+    padding: 24px;
+    border-radius: 18px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) auto;
+    gap: 12px;
+    align-items: center;
+}
+
+.create-wish-form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.create-wish-form button {
+    background: #5b4bff;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.create-wish-form button:hover {
+    background: #4737e6;
+}
+
+@media (max-width: 900px) {
+    .create-wish-form {
+        grid-template-columns: 1fr;
+    }
+}

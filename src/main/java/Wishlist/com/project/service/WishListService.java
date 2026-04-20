@@ -17,20 +17,13 @@ public class WishListService {
         this.wishListRepository = wishListRepository;
     }
 
-    public List<Wish> getAllWishes() {
-        return wishListRepository.getAllWishes();
-    }
-
-    public List<User> getAllUsers(){
-        return wishListRepository.getAllUsers();
-    }
-
-    public List<WishList> getAllWishLists(){
-        return wishListRepository.getAllWishLists();
-    }
 
     public void signupUser(User user){
         wishListRepository.signupUser(user);
+    }
+
+    public void createWish(Wish wish, int wishListId){
+        wishListRepository.createWish(wish,wishListId);
     }
 
     public List<User> findUserForLogin(String email, String password){
@@ -52,5 +45,6 @@ public class WishListService {
     public List<Wish> findWishesByWishListId(int wishId){
         return wishListRepository.findWishesByWishListId(wishId);
     }
+
 
 }

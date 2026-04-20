@@ -60,6 +60,26 @@ public class WishListController {
         return "login";
     }
 
+    @PostMapping("/wishlist/{id}/create-wish")
+    public String createWish(@PathVariable int id, @ModelAttribute Wish wish, HttpSession session){
+
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        if (userId == null){
+            return "redirect:/wish/login";
+        }
+
+        WishList wishList = wishListService.findWishListById(id);
+
+        if (wishList.getUserId() != userId) {
+            return "redirect:/wish/dashboard";
+        }
+
+        wishListService.createWish(wish, id);
+
+        return "redirect:/wish/wishlist/" + id;
+    }
+
     @GetMapping("/logout")
     public String logout(HttpSession session){
         session.invalidate();
@@ -77,6 +97,7 @@ public class WishListController {
 
         User user = wishListService.findUserById(userId);
         List<WishList> wishLists = wishListService.findWishListsByUserId(userId);
+
 
         model.addAttribute("user", user);
         model.addAttribute("wishLists", wishLists);
@@ -96,6 +117,10 @@ public class WishListController {
         User user = wishListService.findUserById(userId);
         WishList wishList = wishListService.findWishListById(id);
         List<Wish> wishes = wishListService.findWishesByWishListId(id);
+
+        if (wishList.getUserId() != userId) {
+            return "redirect:/wish/dashboard";
+        }
 
         model.addAttribute("user", user);
         model.addAttribute("wishList", wishList);
