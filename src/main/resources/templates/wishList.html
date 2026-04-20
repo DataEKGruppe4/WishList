@@ -31,15 +31,34 @@
 
         <p class="wish-description" th:text="${wish.description}">Beskrivelse</p>
 
-        <p class="price">
-          <span th:text="${wish.price}">0</span> kr.
-        </p>
+        <div class="wish-footer">
+          <p class="price">
+            <span th:text="${wish.price}">0</span> kr.
+          </p>
 
-        <a class="wish-btn"
-           th:href="${wish.link}"
-           target="_blank">
-          Se produkt
-        </a>
+          <div class="wish-actions">
+            <a class="wish-btn"
+               th:href="${wish.link}"
+               target="_blank">
+              Se produkt
+            </a>
+
+            <p th:if="${wish.isBought}" class="bought-label">Købt</p>
+
+            <form th:if="${!wish.isBought}"
+                  th:action="@{/wish/wishlist/{wishlistId}/wish/{wishId}/bought(wishlistId=${wishList.wishListId}, wishId=${wish.wishId})}"
+                  method="post">
+              <button type="submit" class="bought-btn">Markér som købt</button>
+            </form>
+
+            <form th:if="${wish.isBought}"
+                  th:action="@{/wish/wishlist/{wishlistId}/wish/{wishId}/unbought(wishlistId=${wishList.wishListId}, wishId=${wish.wishId})}"
+                  method="post">
+              <button type="submit" class="undo-btn">Fortryd</button>
+            </form>
+          </div>
+        </div>
+
       </div>
 
     </div>
