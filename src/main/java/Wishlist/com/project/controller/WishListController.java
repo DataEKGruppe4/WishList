@@ -60,6 +60,13 @@ public class WishListController {
         return "login";
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "redirect:/wish/login?logout";
+
+    }
+
     @GetMapping("/dashboard")
     public String showDashboard(HttpSession session ,Model model){
         Integer userId = (Integer) session.getAttribute("userId");
@@ -77,12 +84,28 @@ public class WishListController {
         return "dashboard";
     }
 
-    @GetMapping("/logout")
-    public String logout(HttpSession session){
-        session.invalidate();
-        return "redirect:/wish/login?logout";
+    @GetMapping("/wishlist/{id}")
+    public String showWishList (@PathVariable int id, HttpSession session, Model model){
 
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        if (userId == null){
+            return "redirect:/wish/login";
+        }
+
+        User user = wishListService.findUserById(userId);
+        WishList wishList = wishListService.findWishListById(id);
+        List<Wish> wishes = wishListService.findWishesByWishListId(id);
+
+        model.addAttribute("user", user);
+        model.addAttribute("wishList", wishList);
+        model.addAttribute("wishes", wishes);
+
+        return "wishList";
     }
+
+
+
 
 
 }

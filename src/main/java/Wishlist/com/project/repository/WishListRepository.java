@@ -76,6 +76,22 @@ public class WishListRepository {
         );
     }
 
+    public List<Wish> findWishesByWishListId(int wishListId){
+        return jdbcTemplate.query(
+                "SELECT * FROM Wish WHERE wishlist_id = ?",
+                (rs, rowNum) -> new Wish(
+                        rs.getInt("wish_id"),
+                        rs.getInt("wishlist_id"),
+                        rs.getString("title"),
+                        rs.getString("description"),
+                        rs.getDouble("price"),
+                        rs.getString("link"),
+                        rs.getBoolean("is_bought")
+                ),
+                wishListId
+        );
+    }
+
 
 
 

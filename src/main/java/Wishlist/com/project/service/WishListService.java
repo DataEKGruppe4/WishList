@@ -49,4 +49,8 @@ public class WishListService {
         return wishListRepository.findWishListById(wishList);
     }
 
+    public List<Wish> findWishesByWishListId(int wishId){
+        return wishListRepository.findWishesByWishListId(wishId);
+    }
+
 }
