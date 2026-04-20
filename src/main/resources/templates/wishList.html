@@ -1,82 +1,99 @@
 <!DOCTYPE html>
 <html lang="da" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Wishlist</title>
-  <link rel="stylesheet" th:href="@{/style.css}">
-  <link rel="stylesheet" th:href="@{/wishlist.css}">
+    <meta charset="UTF-8">
+    <title>Wishlist</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" th:href="@{/wishlist.css}">
 </head>
 <body>
 
 <nav>
-  <strong>Ønskeliste</strong>
-  <ul>
-    <li><a th:href="@{/wish/dashboard}">Dashboard</a></li>
-    <li><a th:href="@{/wish/logout}">Log ud</a></li>
-  </ul>
+    <strong>Ønskeliste</strong>
+    <ul>
+        <li><a th:href="@{/wish/dashboard}">Dashboard</a></li>
+        <li><a th:href="@{/wish/logout}">Log ud</a></li>
+    </ul>
 </nav>
 
 <div class="wishlist-page">
 
-  <div class="wishlist-header">
-    <h1 th:text="${wishList.name}">Wishlist navn</h1>
-    <p class="wishlist-owner">Ejer: <span th:text="${user.name}">Bruger</span></p>
-  </div>
+    <div class="wishlist-header">
 
-  <section class="wish-section">
-    <div class="wish-container">
+        <h1 class="wishlist-title">
+            <span th:text="${wishList.name}">Wishlist navn</span>
+        </h1>
 
-      <div class="wish-card" th:each="wish : ${wishes}">
-        <h3 th:text="${wish.title}">Titel</h3>
-
-        <p class="wish-description" th:text="${wish.description}">Beskrivelse</p>
-
-        <div class="wish-footer">
-          <p class="price">
-            <span th:text="${wish.price}">0</span> kr.
-          </p>
-
-          <div class="wish-actions">
-            <a class="wish-btn"
-               th:href="${wish.link}"
-               target="_blank">
-              Se produkt
-            </a>
-
-            <p th:if="${wish.isBought}" class="bought-label">Købt</p>
-
-            <form th:if="${!wish.isBought}"
-                  th:action="@{/wish/wishlist/{wishlistId}/wish/{wishId}/bought(wishlistId=${wishList.wishListId}, wishId=${wish.wishId})}"
-                  method="post">
-              <button type="submit" class="bought-btn">Markér som købt</button>
-            </form>
-
-            <form th:if="${wish.isBought}"
-                  th:action="@{/wish/wishlist/{wishlistId}/wish/{wishId}/unbought(wishlistId=${wishList.wishListId}, wishId=${wish.wishId})}"
-                  method="post">
-              <button type="submit" class="undo-btn">Fortryd</button>
-            </form>
-          </div>
-        </div>
-
-      </div>
+        <p class="wishlist-owner">
+            Ejer <span class="wishlist-owner-name" th:text="${user.name}">Bruger</span>
+        </p>
 
     </div>
-  </section>
 
-  <section class="create-wish-section">
-    <h2>Opret nyt ønske</h2>
+    <section class="wish-section">
+        <div class="wish-container">
 
-    <form class="create-wish-form"
-          th:action="@{/wish/wishlist/{id}/create-wish(id=${wishList.wishListId})}"
-          method="post">
-      <input type="text" name="title" placeholder="Titel" required>
-      <input type="text" name="description" placeholder="Beskrivelse" required>
-      <input type="number" step="0.01" name="price" placeholder="Pris" required>
-      <input type="text" name="link" placeholder="Link">
-      <button type="submit">Opret ønske</button>
-    </form>
-  </section>
+            <div class="wish-card" th:each="wish : ${wishes}">
+                <h3 th:text="${wish.title}">Titel</h3>
+
+                <p class="wish-description"
+                   th:if="${wish.description != null and !#strings.isEmpty(wish.description)}"
+                   th:text="${wish.description}">
+                </p>
+
+                <div class="wish-footer">
+                    <p class="price">
+                        <span th:text="${wish.price}">0</span> kr.
+                    </p>
+
+                    <div class="wish-actions">
+                        <a class="wish-btn"
+                           th:if="${wish.link != null and !#strings.isEmpty(wish.link)}"
+                           th:href="${wish.link}"
+                           target="_blank">
+                            Se produkt
+                        </a>
+
+                        <p th:if="${wish.isBought}" class="bought-label">Købt</p>
+
+                        <form th:if="${!wish.isBought}"
+                              th:action="@{/wish/wishlist/{wishlistId}/wish/{wishId}/bought(wishlistId=${wishList.wishListId}, wishId=${wish.wishId})}"
+                              method="post">
+                            <button type="submit" class="bought-btn">Markér som købt</button>
+                        </form>
+
+                        <form th:if="${wish.isBought}"
+                              th:action="@{/wish/wishlist/{wishlistId}/wish/{wishId}/unbought(wishlistId=${wishList.wishListId}, wishId=${wish.wishId})}"
+                              method="post">
+                            <button type="submit" class="undo-btn">Fortryd</button>
+                        </form>
+
+                        <form th:action="@{/wish/wishlist/{wishlistId}/wish/{wishId}/delete(wishlistId=${wishList.wishListId}, wishId=${wish.wishId})}"
+                              method="post">
+                            <button type="submit" class="delete-btn">Slet</button>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section class="create-wish-section">
+        <h2>Opret nyt ønske</h2>
+
+        <form class="create-wish-form"
+              th:action="@{/wish/wishlist/{id}/create-wish(id=${wishList.wishListId})}"
+              method="post">
+            <input type="text" name="title" placeholder="Titel" required>
+            <input type="text" name="description" placeholder="Beskrivelse">
+            <input type="number" step="0.01" name="price" placeholder="Pris" required>
+            <input type="text" name="link" placeholder="Link">
+            <button type="submit">Opret ønske</button>
+        </form>
+    </section>
 
 </div>
 

@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(to bottom right, #f8f6ff, #eef4ff);
@@ -15,86 +19,175 @@ body {
 
 /* Navbar */
 nav {
-    background-color: #6c63ff;
+    background: linear-gradient(90deg, #5b4bff, #6f63ff);
     padding: 20px 40px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.10);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.10);
 }
 
 nav strong {
     color: white;
-    font-size: 28px;
+    font-size: 32px;
     display: inline-block;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    font-weight: 700;
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    gap: 20px;
+    gap: 18px;
     flex-wrap: wrap;
 }
 
 nav ul li a {
     text-decoration: none;
     color: white;
-    font-weight: bold;
-    padding: 8px 14px;
-    border-radius: 8px;
-    transition: 0.3s;
+    font-weight: 600;
+    padding: 10px 14px;
+    border-radius: 10px;
+    transition: 0.2s ease;
 }
 
 nav ul li a:hover {
-    background-color: rgba(255, 255, 255, 0.20);
+    background-color: rgba(255, 255, 255, 0.18);
 }
 
-/* Header / hero */
-header {
+/* Hero */
+.hero {
     text-align: center;
-    padding: 60px 20px 40px;
+    padding: 80px 20px 50px;
 }
 
-header h1 {
-    font-size: 42px;
-    color: #3d348b;
-    margin-bottom: 15px;
-}
-
-header p {
-    max-width: 700px;
+.hero-content {
+    max-width: 850px;
     margin: 0 auto;
-    font-size: 18px;
-    color: #555;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(91, 75, 255, 0.10);
+    color: #5b4bff;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-weight: 600;
+    margin-bottom: 18px;
+}
+
+.hero h1 {
+    font-size: 56px;
+    line-height: 1.08;
+    color: #3d348b;
+    margin-bottom: 18px;
+    letter-spacing: -1px;
+}
+
+.hero-text {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 20px;
+    color: #666;
+}
+
+.hero-actions {
+    margin-top: 28px;
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.primary-btn,
+.secondary-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 22px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.primary-btn {
+    background: #5b4bff;
+    color: white;
+    box-shadow: 0 10px 24px rgba(91, 75, 255, 0.20);
+}
+
+.primary-btn:hover {
+    background: #4737e6;
+    transform: translateY(-1px);
+}
+
+.secondary-btn {
+    background: white;
+    color: #5b4bff;
+    border: 1px solid #dcd8ff;
+}
+
+.secondary-btn:hover {
+    background: #f5f3ff;
 }
 
 /* Main sections */
 main {
     width: 90%;
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding-bottom: 40px;
+    padding-bottom: 50px;
 }
 
 section {
     background-color: white;
     margin: 30px 0;
-    padding: 30px;
-    border-radius: 18px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    padding: 34px;
+    border-radius: 22px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
 }
 
 section h2 {
     color: #3d348b;
-    margin-bottom: 15px;
-    font-size: 28px;
+    margin-bottom: 16px;
+    font-size: 34px;
+    line-height: 1.15;
 }
 
 section p {
+    font-size: 18px;
+    color: #4b4b4b;
+}
+
+/* Features */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    margin-top: 10px;
+}
+
+.feature-card {
+    background: #fcfcff;
+    border: 1px solid #ececff;
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+}
+
+.feature-card h3 {
+    color: #2f2f2f;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.feature-card p {
     font-size: 16px;
-    color: #444;
+    color: #666;
 }
 
 /* Formularside */
-form {
+.page-form {
     background-color: white;
     width: 90%;
     max-width: 500px;
@@ -153,12 +246,13 @@ footer {
     background-color: #3d348b;
     color: white;
     text-align: center;
-    padding: 25px 20px;
-    margin-top: 40px;
+    padding: 28px 20px;
+    margin-top: 50px;
 }
 
 footer p {
-    margin: 5px 0;
+    margin: 6px 0;
+    font-size: 16px;
 }
 
 /* Små hjælpeting */
@@ -182,4 +276,134 @@ footer p {
     color: #555;
     max-width: 600px;
     margin: 0 auto;
+}
+
+/* Mobil */
+@media (max-width: 700px) {
+    nav {
+        padding: 18px 20px;
+    }
+
+    nav strong {
+        font-size: 28px;
+    }
+
+    .hero {
+        padding: 60px 20px 40px;
+    }
+
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .hero-text {
+        font-size: 18px;
+    }
+
+    section {
+        padding: 24px;
+    }
+
+    section h2 {
+        font-size: 28px;
+    }
+}
+
+/* Auth pages */
+.auth-intro {
+    text-align: center;
+    padding: 60px 20px 20px;
+}
+
+.intro-badge {
+    display: inline-block;
+    background: rgba(91, 75, 255, 0.10);
+    color: #5b4bff;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.auth-intro h1 {
+    font-size: 52px;
+    line-height: 1.08;
+    color: #2f2f2f;
+    margin-bottom: 14px;
+    letter-spacing: -1px;
+}
+
+.auth-intro p:last-child {
+    max-width: 650px;
+    margin: 0 auto;
+    font-size: 18px;
+    color: #7a7a92;
+    line-height: 1.6;
+}
+
+.page-form {
+    background: #fcfcff;
+    width: 90%;
+    max-width: 520px;
+    margin: 24px auto 70px;
+    padding: 30px;
+    border-radius: 22px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+    border: 1px solid #ececff;
+}
+
+.field {
+    margin-bottom: 22px;
+}
+
+.label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #3d348b;
+}
+
+.input {
+    width: 100%;
+    height: 52px;
+    padding: 0 16px;
+    border: 1px solid #d9d9e8;
+    border-radius: 14px;
+    font-size: 16px;
+    color: #2f2f2f;
+    background: white;
+    transition: 0.2s ease;
+}
+
+.input::placeholder {
+    color: #9a9aaf;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #5b4bff;
+    box-shadow: 0 0 0 4px rgba(91, 75, 255, 0.12);
+}
+
+input[type="submit"] {
+    width: 100%;
+    height: 52px;
+    background: #5b4bff;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+input[type="submit"]:hover {
+    background: #4737e6;
+    transform: translateY(-1px);
+}
+
+input[type="submit"]:active {
+    transform: scale(0.98);
 }

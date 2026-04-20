@@ -18,20 +18,38 @@
 <div class="dashboard-page">
 
     <div class="dashboard-header">
-        <h1>Velkommen, <span th:text="${user.name}">Bruger</span></h1>
-        <p>Her kan du se og oprette dine ønskelister</p>
+        <h1 class="dashboard-title">
+            Velkommen <span class="user-name" th:text="${user.name}">Bruger</span>
+        </h1>
+        <p>Her kan du administrere og oprette dine ønskelister ét sted.</p>
     </div>
 
     <section class="dashboard-section">
         <h2>Dine ønskelister</h2>
 
         <div class="dashboard-wishlist-container">
-            <a class="dashboard-wishlist-card"
-               th:each="wishlist : ${wishLists}"
-               th:href="@{/wish/wishlist/{id}(id=${wishlist.wishListId})}">
+
+            <div class="dashboard-wishlist-card"
+                 th:each="wishlist : ${wishLists}"
+                 th:onclick="|window.location.href='/wish/wishlist/${wishlist.wishListId}'|">
+
                 <h3 th:text="${wishlist.name}">Wishlist navn</h3>
                 <p>Klik for at åbne ønskelisten</p>
-            </a>
+
+                <div class="dashboard-card-actions">
+
+                    <form th:action="@{/wish/dashboard/wishlist/{id}/delete(id=${wishlist.wishListId})}"
+                          method="post"
+                          onclick="event.stopPropagation();">
+
+                        <button type="submit" class="delete-btn">Slet</button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
         </div>
     </section>
 

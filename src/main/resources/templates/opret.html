@@ -8,38 +8,37 @@
 <body>
 
 <nav>
-      <strong>Ønskeliste</strong>
-      <ul>
-        <li><a th:href="@{/wish}">Hjem</a></li>
-        <li><a th:href="@{/wish/login}">Login</a></li>
-        <li><a th:href="@{/wish/opret}">Opret bruger</a></li>
-      </ul>
+  <strong>Ønskeliste</strong>
+  <ul>
+    <li><a th:href="@{/wish}">Hjem</a></li>
+    <li><a th:href="@{/wish/login}">Login</a></li>
+    <li><a th:href="@{/wish/opret}">Opret bruger</a></li>
+  </ul>
 </nav>
 
-<header>
-  <h1>Oprettelse</h1>
-  <p>Her kan du oprette din helt egen profil og få adgang til at lave og se dine ønskelister.</p>
-</header>
+<div class="page-intro auth-intro">
+  <p class="intro-badge">Kom i gang</p>
+  <h1>Opret bruger</h1>
+  <p>Opret din profil og få adgang til at lave og se dine ønskelister.</p>
+</div>
 
-<form th:action="@{/wish/signup}" method="post">
+<form class="page-form" method="post" th:action="@{/wish/opret}">
   <div class="field">
-    <label class="label" for="name">Fulde navn</label>
-    <input class="input" type="text" id="name" name="name" placeholder="Indtast dit navn her" required>
-  </div>
-
-  <div class="field">
-    <label class="label" for="email">Email</label>
-    <input class="input" type="email" id="email" name="email" placeholder="Indtast din email her" required>
+    <label class="label">Fulde navn</label>
+    <input class="input" type="text" name="name" placeholder="Indtast dit navn her" required>
   </div>
 
   <div class="field">
-    <label class="label" for="password">Password</label>
-    <input class="input" type="password" id="password" name="password" placeholder="Indtast dit password her" required>
+    <label class="label">Email</label>
+    <input class="input" type="email" name="email" placeholder="Indtast din email her" required>
   </div>
 
-  <div>
-    <input type="submit" value="Opret bruger">
+  <div class="field">
+    <label class="label">Password</label>
+    <input class="input" type="password" name="password" placeholder="Indtast dit password her" required>
   </div>
+
+  <input type="submit" value="Opret bruger">
 </form>
 
 </body>
