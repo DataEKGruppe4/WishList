@@ -33,6 +33,19 @@ public class WishListService {
         wishListRepository.markWishAsBought(wishId, bought);
     }
 
+    public void deleteWish(int wishId){
+        wishListRepository.deleteWish(wishId);
+    }
+
+    public void deleteWishList(int wishListId){
+        wishListRepository.deleteWishList(wishListId);
+    }
+
+    public void deleteWishListWithWishes(int wishListId){
+        wishListRepository.deleteWishesByWishListId(wishListId);
+        wishListRepository.deleteWishList(wishListId);
+    }
+
     public List<User> findUserForLogin(String email, String password) {
         return wishListRepository.findUserForLogin(email, password);
     }

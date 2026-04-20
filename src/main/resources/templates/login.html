@@ -16,28 +16,24 @@
     </ul>
 </nav>
 
-<header>
+<div class="page-intro auth-intro">
+    <p class="intro-badge">Velkommen tilbage</p>
     <h1>Login</h1>
-    <p>Her kan du logge ind på din helt egen profil.</p>
-    <p th:if="${error}" th:text="${error}" style="color: red"></p>
-</header>
+    <p>Log ind på din profil og få adgang til dine ønskelister.</p>
+</div>
 
-
-<form th:action="@{/wish/login}" method="post">
+<form class="page-form" method="post" th:action="@{/wish/login}">
     <div class="field">
-        <label class="label" for="email">Email</label>
-        <input class="input" type="email" id="email" name="email" placeholder="Indtast din email her" required>
+        <label class="label">Email</label>
+        <input class="input" type="email" name="email" placeholder="Indtast din email her" required>
     </div>
 
     <div class="field">
-        <label class="label" for="password">Password</label>
-        <input class="input" type="password" id="password" name="password" placeholder="Indtast dit password her"
-               required>
+        <label class="label">Password</label>
+        <input class="input" type="password" name="password" placeholder="Indtast dit password her" required>
     </div>
 
-    <div>
-        <input type="submit" value="Login">
-    </div>
+    <input type="submit" value="Login">
 </form>
 
 </body>

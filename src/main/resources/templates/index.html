@@ -6,37 +6,67 @@
     <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
+
 <nav>
     <strong>Ønskeliste</strong>
-    <br>
     <ul>
-        <li><a th:href="@{/wish}" class="nav">Hjem</a></li>
-        <li><a href="#Om" class="nav">Om</a></li>
-        <li><a th:href="@{/wish/login}" class="nav">Login</a></li>
-        <li><a th:href="@{/wish/opret}" class="nav">Opret bruger</a></li>
-        <li><a href="#Kontakt" class="nav">Kontakt os</a></li>
+        <li><a th:href="@{/wish}">Hjem</a></li>
+        <li><a href="#om">Om</a></li>
+        <li><a th:href="@{/wish/login}">Login</a></li>
+        <li><a th:href="@{/wish/opret}">Opret bruger</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
     </ul>
 </nav>
 
-<header id="Hjem">
-    <h1>Ønskeliste</h1>
-    <p>Velkommen til din helt egen og nemme ønskeliste, her kan du oprette og dele din ønskeliste med dine kære.</p>
+<header id="hjem" class="hero">
+    <div class="hero-content">
+        <p class="hero-badge">Nem og moderne ønskeliste</p>
+        <h1>Lav og del dine ønskelister ét sted</h1>
+        <p class="hero-text">
+            Opret ønskelister til fødselsdage, jul og andre arrangementer, og del dem nemt med familie og venner.
+        </p>
+
+        <div class="hero-actions">
+            <a th:href="@{/wish/opret}" class="primary-btn">Kom i gang</a>
+            <a th:href="@{/wish/login}" class="secondary-btn">Login</a>
+        </div>
+    </div>
 </header>
 
 <main>
-    <section id="Om">
+    <section id="om">
         <h2>Hvem er vi?</h2>
+        <p>
+            Vi har lavet Ønskeliste for at gøre det nemmere at samle ønsker ét sted.
+            Her kan du oprette dine egne ønskelister, holde styr på dine ønsker og dele dem med dem, du holder af.
+        </p>
+    </section>
 
-        <p>Vi er en engageret gruppe af mennesker der fik ideen om at videreudvikle en ønskeliste alle kan være en del
-            af,
-            med formål om at be om masser af gaver til masser af forskellige arrangementer.</p>
+    <section>
+        <h2>Hvad kan du bruge siden til?</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>Opret ønskelister</h3>
+                <p>Lav ønskelister til fødselsdag, jul eller andre begivenheder.</p>
+            </div>
 
+            <div class="feature-card">
+                <h3>Del med andre</h3>
+                <p>Gør det nemt for familie og venner at se, hvad du ønsker dig.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Hold overblik</h3>
+                <p>Se dine ønsker samlet og undgå forvirring omkring gaver.</p>
+            </div>
+        </div>
     </section>
 </main>
-<br>
-<footer id="Kontakt">
-    <p>Kontakt</p>
+
+<footer id="kontakt">
+    <p><strong>Kontakt</strong></p>
     <p>Email: ønskelisteexample@email.com</p>
 </footer>
+
 </body>
 </html>

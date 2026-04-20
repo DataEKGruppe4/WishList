@@ -187,5 +187,46 @@ public class WishListController {
         return "redirect:/wish/wishlist/" + wishListId;
     }
 
+    @PostMapping("/wishlist/{wishlistId}/wish/{wishId}/delete")
+    public String deleteWish(@PathVariable("wishlistId") int wishListId, @PathVariable("wishId") int wishId, HttpSession session) {
+
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        if (userId == null) {
+            return "redirect:/wish/login";
+        }
+
+        WishList wishList = wishListService.findWishListById(wishListId);
+
+        if (wishList.getUserId() != userId) {
+            return "redirect:/wish/dashboard";
+        }
+
+        wishListService.deleteWish(wishId);
+
+        wishListService.deleteWish(wishId);
+
+        return "redirect:/wish/wishlist/" + wishListId;
+    }
+
+    @PostMapping("/dashboard/wishlist/{wishlistId}/delete")
+    public String deleteWishList(@PathVariable("wishlistId") int wishListId, HttpSession session) {
+
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        if (userId == null) {
+            return "redirect:/wish/login";
+        }
+
+        WishList wishList = wishListService.findWishListById(wishListId);
+
+        if (wishList.getUserId() != userId) {
+            return "redirect:/wish/dashboard";
+        }
+
+        wishListService.deleteWishList(wishListId);
+
+        return "redirect:/wish/dashboard";
+    }
 
 }

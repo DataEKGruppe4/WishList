@@ -24,7 +24,7 @@ CREATE TABLE Wish
     wishlist_id INT          NOT NULL,
     title       VARCHAR(255) NOT NULL,
     description TEXT,
-    price       DECIMAL(10, 2),
+    price       DECIMAL(15, 2),
     link        VARCHAR(1000),
     is_bought   BOOLEAN,
     FOREIGN KEY (wishlist_id) REFERENCES Wishlist (wishlist_id)

@@ -54,13 +54,30 @@ public class WishListRepository {
         );
     }
 
-    public void createWishList(WishList wishList, int userId){
+    public void createWishList(WishList wishList, int userId) {
         String sql = "INSERT INTO Wishlist (user_id, name) VALUES (?,?)";
 
         jdbcTemplate.update(sql,
                 userId,
                 wishList.getName()
         );
+    }
+
+    public void deleteWish(int wishId) {
+        String sql = "DELETE FROM Wish WHERE wish_id = ?";
+
+        jdbcTemplate.update(sql, wishId);
+    }
+
+    public void deleteWishList(int wishListId){
+        String sql ="DELETE FROM Wishlist WHERE wishlist_id = ?";
+
+        jdbcTemplate.update(sql, wishListId);
+    }
+
+    public void deleteWishesByWishListId(int wishListId){
+        String sql = "DELETE FROM Wish WHERE wishlist_id = ?";
+        jdbcTemplate.update(sql, wishListId);
     }
 
 
@@ -123,17 +140,4 @@ public class WishListRepository {
         jdbcTemplate.update(sql, bought, wishId);
     }
 
-
-
-    public void save(Wish wish) {
-        jdbcTemplate.update(
-                "INSERT INTO Wish (wishlist_id, title, description, price, link, is_bought) VALUES (?, ?, ?, ?, ?, ?)",
-                wish.getWishListId(),
-                wish.getTitle(),
-                wish.getDescription(),
-                wish.getPrice(),
-                wish.getLink(),
-                wish.getIsBought()
-        );
-    }
 }
