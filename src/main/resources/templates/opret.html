@@ -22,6 +22,10 @@
   <p>Opret din profil og få adgang til at lave og se dine ønskelister.</p>
 </div>
 
+<div th:if="${errorMessage}" class="error-message">
+  <p th:text="${errorMessage}"></p>
+</div>
+
 <form class="page-form" method="post" th:action="@{/wish/opret}">
   <div class="field">
     <label class="label">Fulde navn</label>

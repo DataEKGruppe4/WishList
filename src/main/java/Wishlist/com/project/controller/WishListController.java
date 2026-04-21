@@ -1,5 +1,7 @@
 package Wishlist.com.project.controller;
 
+import Wishlist.com.project.exception.DuplicateUserException;
+import Wishlist.com.project.exception.InvalidLoginException;
 import Wishlist.com.project.model.User;
 import Wishlist.com.project.model.Wish;
 import Wishlist.com.project.model.WishList;
@@ -22,40 +24,43 @@ public class WishListController {
         this.wishListService = wishListService;
     }
 
+
     @GetMapping("")
     public String showFrontPage() {
         return "index";
     }
 
     @GetMapping("/opret")
-    public String showSignupPage() {
+    public String showSignupPage(Model model) {
+        model.addAttribute("user", new User());
         return "opret";
     }
 
     @GetMapping("/login")
-    public String showLoginPage() {
+    public String showLoginPage(Model model) {
+        model.addAttribute("user", new User());
         return "login";
     }
 
     @PostMapping("/opret")
     public String signupUser(@ModelAttribute User user) {
+
         wishListService.signupUser(user);
+
         return "redirect:/wish/login";
     }
 
     @PostMapping("/login")
-    public String findUserForLogin(@ModelAttribute User user, HttpSession session, Model model) {
+    public String findUserForLogin(@ModelAttribute User user,
+                                   HttpSession session) {
 
-        List<User> users = wishListService.findUserForLogin(user.getEmail(), user.getPassword());
+        User loggedInUser = wishListService.findUserForLogin(
+                        user.getEmail(),
+                        user.getPassword());
 
-        if (!users.isEmpty()) {
-            User loggedInUser = users.getFirst();
-            session.setAttribute("userId", loggedInUser.getUserId());
-            return "redirect:/wish/dashboard";
-        }
+        session.setAttribute("userId", loggedInUser.getUserId());
 
-        model.addAttribute("error", "Forkert email eller password");
-        return "login";
+        return "redirect:/wish/dashboard";
     }
 
     @PostMapping("/wishlist/{id}/create-wish")

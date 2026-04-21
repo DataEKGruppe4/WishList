@@ -22,6 +22,10 @@
     <p>Log ind på din profil og få adgang til dine ønskelister.</p>
 </div>
 
+<div th:if="${error}" class="error-message">
+    <p th:text="${error}"></p>
+</div>
+
 <form class="page-form" method="post" th:action="@{/wish/login}">
     <div class="field">
         <label class="label">Email</label>
