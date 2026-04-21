@@ -42,6 +42,7 @@ public class WishListController {
         return "login";
     }
 
+
     @PostMapping("/opret")
     public String signupUser(@ModelAttribute User user) {
 
@@ -55,8 +56,8 @@ public class WishListController {
                                    HttpSession session) {
 
         User loggedInUser = wishListService.findUserForLogin(
-                        user.getEmail(),
-                        user.getPassword());
+                user.getEmail(),
+                user.getPassword());
 
         session.setAttribute("userId", loggedInUser.getUserId());
 
