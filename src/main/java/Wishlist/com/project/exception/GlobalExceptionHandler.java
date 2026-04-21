@@ -6,15 +6,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(DuplicateUserException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handleDuplicateUserException(DuplicateUserException ex, Model model) {
+    public String handleDuplicateUserException(DuplicateUserException e, Model model) {
 
-        model.addAttribute("errorMessage", ex.getMessage());
+        model.addAttribute("errorMessage", e.getMessage());
         model.addAttribute("user", new User());
 
         return "opret";
@@ -22,17 +23,23 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(InvalidLoginException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handleInvalidLoginException(InvalidLoginException ex, Model model) {
+    public String handleInvalidLoginException(InvalidLoginException e, Model model) {
 
-        model.addAttribute("error", ex.getMessage());
+        model.addAttribute("error", e.getMessage());
         model.addAttribute("user", new User());
 
         return "login";
     }
 
+    @ExceptionHandler(NoResourceFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleNotFound(NoResourceFoundException e, Model model) {
+        return "error/404";
+    }
+
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public String handleGeneralException(Exception ex, Model model) {
+    public String handleGeneralException(Exception e, Model model) {
 
         model.addAttribute("errorMessage", "Der opstod en uventet fejl.");
 
