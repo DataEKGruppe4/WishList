@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>404 - Side ikke fundet</title>
+  <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<nav>
+  <strong>Ønskeliste</strong>
+  <ul>
+    <li><a th:href="@{/wish}">Hjem</a></li>
+    <li><a th:href="@{/wish/login}">Login</a></li>
+    <li><a th:href="@{/wish/opret}">Opret bruger</a></li>
+  </ul>
+</nav>
+
+<div class="page-intro auth-intro">
+
+  <p class="intro-badge">404 FEJL</p>
+
+  <h1>Ups... siden findes ikke</h1>
+
+  <p>
+    Den side du prøvede at besøge findes ikke,
+    eller linket er forkert.
+  </p>
+
+  <br>
+
+  <a th:href="@{/wish}" class="btn-primary">
+    Tilbage til forsiden
+  </a>
+
+</div>
+
+</body>
+</html>

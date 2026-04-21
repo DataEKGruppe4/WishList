@@ -1,9 +1,12 @@
 package Wishlist.com.project.service;
 
+import Wishlist.com.project.exception.DuplicateUserException;
+import Wishlist.com.project.exception.InvalidLoginException;
 import Wishlist.com.project.model.User;
 import Wishlist.com.project.model.Wish;
 import Wishlist.com.project.model.WishList;
 import Wishlist.com.project.repository.WishListRepository;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,14 +21,29 @@ public class WishListService {
     }
 
     public void signupUser(User user) {
-        wishListRepository.signupUser(user);
+        try {
+            wishListRepository.signupUser(user);
+        } catch (DataIntegrityViolationException e) {
+            throw new DuplicateUserException("Denne email findes allerede.");
+        }
+    }
+
+    public User findUserForLogin(String email, String password) {
+
+        List<User> users = wishListRepository.findUserForLogin(email, password);
+
+        if (users.isEmpty()) {
+            throw new InvalidLoginException("Forkert email eller password");
+        }
+
+        return users.getFirst();
     }
 
     public void createWish(Wish wish, int wishListId) {
         wishListRepository.createWish(wish, wishListId);
     }
 
-    public void createWishList(WishList wishList, int userId){
+    public void createWishList(WishList wishList, int userId) {
         wishListRepository.createWishList(wishList, userId);
     }
 
@@ -33,22 +51,20 @@ public class WishListService {
         wishListRepository.markWishAsBought(wishId, bought);
     }
 
-    public void deleteWish(int wishId){
+    public void deleteWish(int wishId) {
         wishListRepository.deleteWish(wishId);
     }
 
-    public void deleteWishList(int wishListId){
+    public void deleteWishList(int wishListId) {
         wishListRepository.deleteWishList(wishListId);
     }
 
-    public void deleteWishListWithWishes(int wishListId){
+    public void deleteWishListWithWishes(int wishListId) {
         wishListRepository.deleteWishesByWishListId(wishListId);
         wishListRepository.deleteWishList(wishListId);
     }
 
-    public List<User> findUserForLogin(String email, String password) {
-        return wishListRepository.findUserForLogin(email, password);
-    }
+
 
     public User findUserById(int userId) {
         return wishListRepository.findUserById(userId);
@@ -62,15 +78,15 @@ public class WishListService {
         return wishListRepository.findWishListById(wishList);
     }
 
-    public void updateWishList(WishList wishList){
+    public void updateWishList(WishList wishList) {
         wishListRepository.updateWishList(wishList);
     }
 
-    public Wish findWishById (int wish){
+    public Wish findWishById(int wish) {
         return wishListRepository.findWishById(wish);
     }
 
-    public void updateWish(Wish wish){
+    public void updateWish(Wish wish) {
         wishListRepository.updateWish(wish);
     }
 
