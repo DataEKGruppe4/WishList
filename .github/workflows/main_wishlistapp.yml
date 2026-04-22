@@ -1,10 +1,42 @@
+name: Build and deploy JAR app to Azure Web App - wishlistapp
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java version
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'microsoft'
+
+      - name: Build with Maven
+        run: mvn clean install
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v4
+        with:
+          name: java-app
+          path: target/*.jar
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
     permissions:
       id-token: write
       contents: read
-  
+
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
