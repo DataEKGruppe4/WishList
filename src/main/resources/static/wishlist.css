@@ -316,3 +316,40 @@
         width: 100%;
     }
 }
+
+@media (max-width: 700px) {
+
+    nav ul {
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    nav a {
+        font-size: 14px;
+    }
+
+    .dashboard-title,
+    .wishlist-title {
+        font-size: 34px;
+    }
+
+    .dashboard-wishlist-container,
+    .wish-container {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-form,
+    .create-wish-form {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-form button,
+    .create-wish-form button {
+        width: 100%;
+    }
+
+    .dashboard-page,
+    .wishlist-page {
+        width: 94%;
+    }
+}
