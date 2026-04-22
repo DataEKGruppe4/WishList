@@ -472,3 +472,105 @@ input[type="submit"]:active {
         width: 94%;
     }
 }
+
+@media (max-width: 700px) {
+    body {
+        background: #f2f2f7;
+    }
+
+    nav {
+        padding: 14px 16px;
+    }
+
+    nav strong {
+        font-size: 24px;
+        margin-bottom: 8px;
+    }
+
+    nav ul {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    nav ul li a {
+        font-size: 14px;
+        padding: 8px 10px;
+        border-radius: 12px;
+    }
+
+    .hero,
+    header,
+    .page-intro,
+    .auth-intro {
+        padding: 32px 16px 20px;
+    }
+
+    .hero-content,
+    main,
+    .container {
+        width: 100%;
+        max-width: none;
+    }
+
+    .hero h1,
+    header h1,
+    .auth-intro h1,
+    .page-intro h1 {
+        font-size: 34px;
+        line-height: 1.1;
+    }
+
+    .hero-text,
+    header p,
+    .auth-intro p:last-child,
+    .page-intro p {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    main {
+        width: 100%;
+        max-width: none;
+        padding: 0 16px 30px;
+    }
+
+    section {
+        padding: 20px;
+        border-radius: 24px;
+        margin: 20px 0;
+    }
+
+    section h2 {
+        font-size: 28px;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-form {
+        width: calc(100% - 32px);
+        max-width: none;
+        margin: 20px auto 40px;
+        padding: 22px;
+        border-radius: 24px;
+    }
+
+    .input {
+        height: 52px;
+        padding: 0 16px;
+        border-radius: 16px;
+        font-size: 16px;
+    }
+
+    input[type="submit"] {
+        height: 52px;
+        border-radius: 16px;
+        font-size: 16px;
+    }
+
+    footer {
+        margin-top: 30px;
+        padding: 24px 16px;
+    }
+}
